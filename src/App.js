@@ -1,23 +1,29 @@
-import logo from './logo.svg';
+import React from 'react';
+
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Navgation from './components/sidebar-container/sidebar-container.component';
+import DoctorsPage from './pages/doctors.component';
+import DepartmentsPage from './pages/departmnts/departments.component';
+import HomePage from './pages/home-page/home-page.component';
+import { ReactQueryDevtools } from 'react-query/devtools';
+
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes >
+
+        <Route path='/' element={<Navgation />}>
+          <Route index element={<HomePage />} />
+          <Route path='/doctors' element={<DoctorsPage />} />
+          <Route path='/departments' element={<DepartmentsPage />} />
+          <Route path="/*" element={<h1>Error Page</h1>} />
+        </Route>
+      </Routes>
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right' />
+
     </div>
   );
 }
