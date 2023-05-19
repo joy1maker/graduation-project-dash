@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import BasicTable from "../../components/react-table/react-table.component";
-import CoulmnFilter from "../../components/react-table/tableFilter.component";
+import CoulmnFilter from "../../components/table-help-components/tableFilter.component";
 import { Container } from './departments.styles'
 import { DepartmentContext } from "../../context/department.context";
 import ErrorPage from "../error-page/error-page.component";
+import DepartmentsTable from "../../components/departments-table/departments-table.component";
 
 const DepartmentsPage = () => {
 
@@ -27,9 +27,10 @@ const DepartmentsPage = () => {
             <ErrorPage />
         )
     }
+
     return (
         <Container>
-            <BasicTable COLUMNS={COLUMNS} DATA={Departments} />
+            <DepartmentsTable COLUMNS={COLUMNS} DATA={Departments} />
         </Container>
     )
 }

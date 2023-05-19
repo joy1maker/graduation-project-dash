@@ -7,18 +7,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { QueryProvider } from './react-query/RQ';
 import { BrowserRouter } from 'react-router-dom';
 import { DepartmentProvider } from './context/department.context';
+import { ModalsProvider } from './context/modals.context';
+import { DoctorsProvider } from './context/doctors.context';
+import { FormsProvider } from './context/forms.context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
-  // <React.StrictMode>
-  <BrowserRouter>
-    <QueryProvider>
-      <DepartmentProvider>
-        <App />
-      </DepartmentProvider>
-    </QueryProvider>
-  </BrowserRouter>
-  // </React.StrictMode>
+  <React.StrictMode>
+    <BrowserRouter>
+      <QueryProvider>
+        <ModalsProvider>
+          <DoctorsProvider>
+            <DepartmentProvider>
+              <FormsProvider>
+                <App />
+              </FormsProvider>
+            </DepartmentProvider>
+          </DoctorsProvider>
+        </ModalsProvider>
+      </QueryProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

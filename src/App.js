@@ -3,8 +3,8 @@ import React from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Navgation from './components/sidebar-container/sidebar-container.component';
-import DoctorsPage from './pages/doctors.component';
 import DepartmentsPage from './pages/departmnts/departments.component';
+import DoctorsPage from './pages/doctors/doctors.component';
 import HomePage from './pages/home-page/home-page.component';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
