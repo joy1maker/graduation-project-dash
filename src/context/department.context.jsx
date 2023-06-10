@@ -20,8 +20,8 @@ export const addDepartment = async (department_name) => {
 }
 export const deleteDepartments = async (departments) => {
     try {
-        const requests = departments.map((department) => axios.delete(`http://localhost:8000/department?id=${department.id}`));
-        const responses = await axios.all(requests);
+        const requests = departments.map((department) => axios.post(`http://localhost:8000/api/department-destroy/${department.id}`));
+        await axios.all(requests);
         return true;
     } catch (error) {
         console.error('Error:', error.message);

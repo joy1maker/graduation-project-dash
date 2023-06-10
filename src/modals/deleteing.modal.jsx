@@ -1,20 +1,23 @@
 import React, { useContext, useEffect } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import { ModalsContext } from '../context/modals.context';
-import { deleteDepartments } from '../context/department.context';
+import { DepartmentContext } from '../context/department.context';
 import { DoctorsContext } from '../context/doctors.context';
 
 const DeleteModal = ({ showModal, closeModal, deleteData, type }) => {
 
     const { types } = useContext(ModalsContext)
     const { deleteDoctorsInfo } = useContext(DoctorsContext)
+    const { deleteDepartmentsInfo } = useContext(DepartmentContext);
     const handleDeleation = () => {
 
         switch (type) {
             case types.department:
-                return deleteDepartments(deleteData);
+                return deleteDepartmentsInfo(deleteData);
+
             case types.doctor:
                 return deleteDoctorsInfo(deleteData);
+
             default:
 
         }

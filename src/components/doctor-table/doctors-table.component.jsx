@@ -162,8 +162,12 @@ const DoctorsTable = ({ COLUMNS, DATA }) => {
                                             if (idx === 2) {
 
                                                 return <td
+
                                                     key={idx} {...cell.getCellProps()}>
-                                                    {cell.render('Cell')}
+                                                    <div>
+
+                                                        {cell.render('Cell')}
+                                                    </div>
                                                     <Button variant="secondary" onClick={() => handleOpenModifyModal(row.values.id)}>modfiy</Button>{' '}
                                                     <Button variant="danger" onClick={() => handleOpenDeleteModal([row.values])}>delete</Button>{' '}
                                                 </td>
@@ -205,7 +209,7 @@ const DoctorsTable = ({ COLUMNS, DATA }) => {
                 }
             </Select>
             <Button variant="primary" onClick={handleOpenAddModal}>add doctor</Button>{' '}
-            <Button variant="danger" onClick={() => handleOpenDeleteModal(selectedFlatRows.map(d => d.original))}>delete all checked departments</Button>{' '}
+            <Button variant="danger" onClick={() => handleOpenDeleteModal(selectedFlatRows.map(d => d.original))}>delete all checked doctors</Button>{' '}
             <AddModal showModal={showAddModal} closeModal={handleCloseAddModal} type={types.doctor} />
             <DeleteModal showModal={showDeleteModal} closeModal={handleCloseDeleteModal} deleteData={deleteData} type={types.doctor} />
             {modifyID && <ModifyModal showModal={showModifyModal} closeModal={handleCloseModifyModal} type={types.doctor} id={modifyID} />}

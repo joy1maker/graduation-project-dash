@@ -6,7 +6,6 @@ import { Button } from "react-bootstrap";
 import ModifyModal from "../../modals/modfiying.modal";
 import AddModal from "../../modals/adding.modal";
 import { ModalsContext } from "../../context/modals.context";
-import DeleatingModal from "../../modals/deleteing.modal";
 import DeleteModal from "../../modals/deleteing.modal";
 import { FormsContext } from "../../context/forms.context";
 
@@ -17,7 +16,7 @@ const DepartmentsTable = ({ COLUMNS, DATA }) => {
     const data = useMemo(() => DATA, [DATA]);
     const { showModifyModal, setShowModifyModal, showAddModal, setShowAddModal, showDeleteModal, setShowDeleteModal, types } = useContext(ModalsContext)
     const [modifyID, setModifyID] = useState(null);
-
+    const [deleteData, setDeleteData] = useState([]);
 
     const handleOpenModifyModal = (id) => {
         setModifyID(id);
@@ -28,7 +27,8 @@ const DepartmentsTable = ({ COLUMNS, DATA }) => {
 
         setShowAddModal(true);
     };
-    const handleOpenDeleteModal = () => {
+    const handleOpenDeleteModal = (data) => {
+        setDeleteData(data);
         setShowDeleteModal(true);
     }
     const handleCloseModifyModal = () => {
@@ -132,9 +132,11 @@ const DepartmentsTable = ({ COLUMNS, DATA }) => {
 
                                                 return <td
                                                     key={idx} {...cell.getCellProps()}>
-                                                    {cell.render('Cell')}
+                                                    <div>
+                                                        {cell.render('Cell')}
+                                                    </div>
                                                     <Button variant="secondary" onClick={() => handleOpenModifyModal(row.values.id)}>modfiy</Button>{' '}
-                                                    <Button variant="danger">delete</Button>{' '}
+                                                    <Button variant="danger" onClick={() => handleOpenDeleteModal([row.values])}>delete</Button>{' '}
                                                 </td>
 
                                             }
@@ -177,9 +179,9 @@ const DepartmentsTable = ({ COLUMNS, DATA }) => {
                     }
                 </Select>
                 <Button variant="primary" onClick={handleOpenAddModal}>add department</Button>{' '}
-                <Button variant="danger">delete all checked departments</Button>{' '}
+                <Button variant="danger" onClick={() => handleOpenDeleteModal(selectedFlatRows.map(d => { return d.original; }))}>delete all checked departments</Button>{' '}
                 <AddModal showModal={showAddModal} closeModal={handleCloseAddModal} type={types.department} />
-                <DeleteModal showModal={showDeleteModal} closeModal={handleCloseDeleteModal} deleteData={selectedFlatRows} type={types.department} />
+                <DeleteModal showModal={showDeleteModal} closeModal={handleCloseDeleteModal} deleteData={deleteData} type={types.department} />
                 {modifyID && <ModifyModal showModal={showModifyModal} closeModal={handleCloseModifyModal} type={types.department} id={modifyID} />}
             </TableAttatchments>
 
