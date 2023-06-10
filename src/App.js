@@ -9,12 +9,12 @@ import HomePage from './pages/home-page/home-page.component';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
 
+
 function App() {
 
   return (
     <div className="App">
       <Routes >
-
         <Route path='/' element={<Navgation />}>
           <Route index element={<HomePage />} />
           <Route path='/doctors' element={<DoctorsPage />} />

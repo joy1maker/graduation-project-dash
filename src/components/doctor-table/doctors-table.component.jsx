@@ -28,7 +28,6 @@ const DoctorsTable = ({ COLUMNS, DATA }) => {
         setShowAddModal(true);
     };
     const handleOpenDeleteModal = (data) => {
-        console.log("called")
         setDeleteData(data);
         setShowDeleteModal(true);
     }
@@ -101,7 +100,6 @@ const DoctorsTable = ({ COLUMNS, DATA }) => {
         },
         [columns]
     );
-    // console.log(selectedFlatRows.map(d => d.original));
 
     const { pageIndex, pageSize } = state;
     return (
@@ -167,7 +165,7 @@ const DoctorsTable = ({ COLUMNS, DATA }) => {
                                                     key={idx} {...cell.getCellProps()}>
                                                     {cell.render('Cell')}
                                                     <Button variant="secondary" onClick={() => handleOpenModifyModal(row.values.id)}>modfiy</Button>{' '}
-                                                    <Button variant="danger" onClick={() => handleOpenDeleteModal(row.values)}>delete</Button>{' '}
+                                                    <Button variant="danger" onClick={() => handleOpenDeleteModal([row.values])}>delete</Button>{' '}
                                                 </td>
                                             }
                                             else {

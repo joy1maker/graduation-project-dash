@@ -20,7 +20,9 @@ export const FormsProvider = ({ children }) => {
             password: '',
             department: '',
             first_name: '',
-            last_name: ''
+            last_name: '',
+            national_id: '',
+            reservation_phone: ''
         }
     }
     const getModifyFormData = (type, id) => {
@@ -28,7 +30,13 @@ export const FormsProvider = ({ children }) => {
             case types.department:
                 return Departments.find((department) => department.id === id)
             case types.doctor:
-                return doctors.find((doctor) => doctor.id === id)
+                const hidden = ["department_name", "api_token", "created_at", "updated_at", "department_id"]
+                const doctor = doctors.find((doctor) => doctor.id === id);
+                const filterdDoctor = { ...doctor };
+                hidden.forEach(property => {
+                    delete filterdDoctor[property];
+                });
+                return filterdDoctor;
 
             default:
                 return {}

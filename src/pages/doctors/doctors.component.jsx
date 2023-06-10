@@ -4,9 +4,15 @@ import ErrorPage from "../error-page/error-page.component";
 import DoctorsTable from '../../components/doctor-table/doctors-table.component';
 import { useContext } from 'react';
 import { DoctorsContext } from '../../context/doctors.context';
+import { DepartmentContext } from '../../context/department.context';
 
 const DoctorsPage = () => {
     const { doctors, isDoctorsError } = useContext(DoctorsContext);
+    const { Departments } = useContext(DepartmentContext);
+    const fullDoctorsData = doctors.map((doctor) => {
+        const department = Departments.find((department) => department.id === doctor.department_id);
+        return { ...doctor, "department_name": department.department_name };
+    })
     const COLUMNS = [
         {
             Header: "ID",
@@ -57,7 +63,7 @@ const DoctorsPage = () => {
     return (
         <>
             <Container>
-                <DoctorsTable COLUMNS={COLUMNS} DATA={doctors} />
+                <DoctorsTable COLUMNS={COLUMNS} DATA={fullDoctorsData} />
             </Container>
         </>
     )
